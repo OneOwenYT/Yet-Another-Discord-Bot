@@ -1,0 +1,5 @@
+KEYS.py
+*.pyc
+*.json
+*.mp3
+cogs/eco.py

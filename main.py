@@ -1,10 +1,15 @@
 from values import *
 #Imports values needed for information and to tell whether not to run certain commands
 
-import os
-from dotenv import load_dotenv
-load_dotenv()
-TOKEN = os.getenv("TOKEN")
+from KEYS import *
+#Imports important keys
+
+# .ENV FILES SEEM MESSED UP/BROKEN FOR ME, IF YOU KNOW HOW TO FIX IT PLEASE MESSAGE ME
+import os #needed for the os.getenv() function to work and the on_ready event's 2nd print thing to work
+#from dotenv import load_dotenv
+#load_dotenv()
+#TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+#print(f"Token is: {TOKEN}")
 #Imports the token from the .env file, since its a .env file it will not be uploaded to github and stuff like that, you could just put your token in the token area at the bottom but its not reccomended
 
 import discord
@@ -27,45 +32,60 @@ client = commands.Bot(command_prefix = '%', intents=intents)
 async def on_ready():
     global startTime
     startTime = time.time()
-#    os.chdir(r'C:\Users\070LE\OneDrive\Desktop\code stuff\py\MTF Unit Proccesing bot\main.py') # Not needed as VSC had a setting ticked to block py applications to access other files, this had block cogs from working but hadnt stopped the "import X from X" to not work :/ , **ONLY CHANGE THIS VVALUE IF YOU NEED IT**.
-    print(" __________________________________________________________________________________________________________________")
+#    os.chdir(r'C:\Users\070LE\OneDrive\Desktop\code stuff\py\MTF Unit Proccesing bot\main.py') # Not needed as a VSC had a setting ticked to block py applications to access other files, this had block cogs from working but hadnt stopped the "import X from X" to not work :/ , **ONLY CHANGE THIS VVALUE IF YOU NEED IT**.
+    print(" ____________________________________________________________________________________________________________________________________________")
     print(f'| Python script working directory in: {os.listdir()} |')
-    print("|------------------------------------------------------------------------------------------------------------------/")
+    print("|--------------------------------------------------------------------------------------------------------------------------------------------/")
     print(f'| Logged in as {client.user} |')
     print(r'\______________________________________/')
+
+    if onReadyLoggingChannel:
+        formatTime = time.strftime("%D %T", time.localtime(startTime))
+        channel = client.get_channel(onReadyLoggingChannel)
+        await channel.send(f"The bot has came online <@&{onReadyRoleID}>, at {formatTime}, while running version {botVersion}.")
     
+    # Not needed, just prepping for the shift to making all commands /commands (I dread the day I decide to do that)
     try:
         synced = await client.tree.sync()
         print(f"Synced {len(synced)} commands.")
     except Exception as e:   
         print(e)
 
-    while statsInStatus:
+    while statsInStatus >= 1:
         await client.change_presence(activity=discord.Game(f"latency is {round(client.latency * 1000)}ms."))
-        await asyncio.sleep(10)
+        await asyncio.sleep(timeBeforeStatusSwitch)
         uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
         await client.change_presence(activity=discord.Game(f"Bot uptime: {uptime}."))
-        await asyncio.sleep(10)
-        
-    while fakeCryptoPriceChange == 1:
-            with open("data/ecoData2.json", "r") as f:
-                userEco = json.load(f)
+        await asyncio.sleep(timeBeforeStatusSwitch)
+        await client.change_presence(activity=discord.Game(f"Bot version: {botVersion}."))
+        await asyncio.sleep(timeBeforeStatusSwitch)
 
-            if FakeCryptoPrice is None:
-                FakeCryptoPrice = FakeCryptoPrice
-
-            if FakeCryptoPrice not in userEco:
-                userEco[FakeCryptoPrice] = {}
-                userEco[FakeCryptoPrice]['Balance'] = fakeCryptoPrice2
-
-                with open("data/ecoData2.json", "w") as f:
-                    json.dump(userEco, f, indent=8)
-
-            curentPrice = userEco[FakeCryptoPrice]['Price']
-            channel = client.get_channel(messageLoggingChannel)
-            await channel.send(f"Fake Crypto Price changed to:{curentPrice}.")
-            
-            await asyncio.sleep(10)
+# WILL BE ADDED AT A LATER DATE
+#    while fakeCryptoPriceChange >= 1:
+#            print("p1")
+#            with open("data/ecoData2.json", "r") as f:
+#                userEco = json.load(f)
+#            print("p2")
+#
+#            if FakeCryptoPrice is None:
+#                FakeCryptoPrice = fakeCryptoPrice2
+#            print("p3")
+#
+#            if FakeCryptoPrice not in userEco:
+#                userEco[FakeCryptoPrice] = {}
+#                userEco[FakeCryptoPrice]['Balance'] = fakeCryptoPrice2
+#
+#                with open("data/ecoData2.json", "w") as f:
+#                    json.dump(userEco, f, indent=8)
+#            print("p4")
+#
+#            curentPrice = userEco[FakeCryptoPrice]['Price']
+#            channel = client.get_channel(messageLoggingChannel)
+#            await channel.send(f"Fake Crypto Price changed to:{curentPrice}.")
+#
+#            print(f"Fake Crypto Price changed to:{curentPrice}, on an interval of {fakeCryptoPriceChangeTime}.")
+#
+#            await asyncio.sleep(fakeCryptoPriceChangeTime)
 
 
 #Settings are in "values.py"
@@ -673,7 +693,7 @@ async def on_message_delete(message):
     global messagesDeleted
     if messageEditLogging >= 1:
         channel = client.get_channel(messageLoggingChannel)
-        await channel.send(f"<@{message.author.id}>/{message.author} deleted a message, message delted:{message.content}.")
+        await channel.send(f"{message.author.mention}/{message.author} deleted a message, message delted:{message.content}.")
         embedVar = discord.Embed(title=f"<@{message.author.id}> deleted a message", description="", color=0xD90000)
         embedVar.add_field(name=f"Message content {message.content}", value="", inline=False)
         await channel.send(embed=embedVar)
@@ -690,6 +710,7 @@ async def load():
         if filename.endswith(".py"):
             await client.load_extension(f"cogs.{filename[:-3]}")
             print(f"{filename} is loaded. P1")
+
 #cogs moment
 
 async def main():

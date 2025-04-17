@@ -1,3 +1,7 @@
+# Special stuff, DONT TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING
+# (or you are me and you know what you are doing :sunglasses emoji: )
+botVersion = "0.1.1"
+
 #Settings
 
 #1 or above = TRUE , 0 = FALSE
@@ -24,8 +28,9 @@ moderationRole3 = 1216315296080597073
 
 fakeCryptoPrice2 = 100000
 fakeCryptoPriceChange = 1
-minFakeCryptoPrice = -1000
-maxFakeCryptoPrice = 1000
+fakeCryptoPriceChangeTime = 60
+minFakeCryptoPrice = -100
+maxFakeCryptoPrice = 150
 timeBeforeStatusSwitch = 5
 statsInStatus = 1
 levelChannel = 1327658983976079510
@@ -33,6 +38,8 @@ messageLoggingChannel = 1328724439839408269
 welcomeChannel = 1328521419604230147
 errorLoggingChannel  = 1328521419604230147
 commandLoggingChannel = 1292818581360214086
+onReadyLoggingChannel  = 1362365631932006474
+onReadyRoleID = 1362366403004600482
 messageEditLogging = 1
 errorLogging = 1
 commandLogging = 1

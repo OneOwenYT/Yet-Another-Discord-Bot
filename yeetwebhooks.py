@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 import datetime, time
 
+# Only made as a proof of concept to show someone they could just make a bot to remove all webhooks, since their server had just been raided and they were worried about webhooks being used to send messages they didnt want
+
 class YeetWebhooks(commands.Cog):
     def __init__(self, client):
         self.client = client

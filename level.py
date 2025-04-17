@@ -96,9 +96,50 @@ class Level(commands.Cog):
 async def setup(client):
     await client.add_cog(Level(client))
 
-#   TaggodonYT's leveling system code
-#   N/A
+#   TaggodonYT's leveling system code#    @commands.Cog.listener()
+#    async def on_message(self, message):
 
+#        if Leveling != 1 or message.author.bot:
+#            return
+#        
+#        if commandsGiveXP >= 1 and message.content.startswith("%"):
+#            return
+#
+#        with open("data/levelData.json", "r") as f:
+#            levelData = json.load(f)
+#
+#        user_id = str(message.author.id)
+#
+#        if user_id not in levelData:
+#            levelData[user_id] = {'Messages sent': 0, 'Level': startingLevel}
+#
+#        levelData[user_id]['Messages sent'] += 1
+#        messagesSent = levelData[user_id]['Messages sent']
+#        currentLevel = levelData[user_id]['Level']
+#    
+#        leveled_up = False
+#
+#        if fixedLeveling == 1 and messagesSent >= 50:
+#            levelData[str(message.author.id)]['Level'] += 1
+#            levelData[str(message.author.id)]['Messages sent'] = 0
+#            leveled_up = True
+#
+#        elif exponetialLeveling == 1 and messagesSent >= (25 + currentLevel * 10):
+#            levelData[str(message.author.id)]['Level'] += 1
+#            levelData[str(message.author.id)]['Messages sent'] = 0
+#            leveled_up = True
+#
+#        if leveled_up:
+#            newLevel = levelData[str(message.author.id)]['Level']
+#            channel = self.client.get_channel(1327658983976079510)
+#            embedVar = discord.Embed(title=f"{message.author.name} has Leveled up!", color=0xD90000)
+#            embedVar.add_field(name="New Level:", value=f"{newLevel}", inline=False)
+#            embedVar.set_footer(text="Level up every 50 messages!")
+#            await channel.send(embed=embedVar)
+#
+#
+#            with open("data/levelData.json", "w") as f:
+#                json.dump(levelData, f, indent=8)
 #   My leveling system code
 
 #    @commands.Cog.listener()
