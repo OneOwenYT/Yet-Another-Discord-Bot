@@ -10,7 +10,10 @@ Im now going to start working on the project directly in VSC connected to github
 # Plans for the future
 Fixing the leveling system within the next couple of updates, and by update v0.1.5 or around then switching all commands to /commands (its gonna be a pain :cry:).
 
+
+
 # Old Updates
+
 
 # V0.1.0, The first commit.
 Making this repo wasnt fun, im going to try to read more of the documentation on how to make repo's but I just keep getting confused, I accidentaly leaked my bot token first time making one aswell.
