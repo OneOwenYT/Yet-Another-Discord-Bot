@@ -1,6 +1,6 @@
 # Special stuff, DONT TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING
 # (or you are me and you know what you are doing :sunglasses emoji: )
-botVersion = "0.1.1"
+botVersion = "0.1.2"
 
 #Settings
 
