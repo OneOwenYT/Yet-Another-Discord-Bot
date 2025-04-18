@@ -96,7 +96,8 @@ class Level(commands.Cog):
 async def setup(client):
     await client.add_cog(Level(client))
 
-#   TaggodonYT's leveling system code#    @commands.Cog.listener()
+#   TaggodonYT's leveling system code#    
+#    @commands.Cog.listener()
 #    async def on_message(self, message):
 
 #        if Leveling != 1 or message.author.bot:
